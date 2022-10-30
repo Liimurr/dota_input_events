@@ -1,0 +1,7 @@
+﻿<root>
+    <scripts>
+        <include src="file://{resources}/scripts/input_events/input_events.js" />
+        <!-- <include src="file://{resources}/scripts/input_events/input_events_test.js" /> -->
+    </scripts>
+    <Panel></Panel>
+</root>
