@@ -10,12 +10,14 @@
 
     const GetTimeStamp = () => {
         const Storage = GetHotReloadPersistentStorage()
-        return Storage.TimeStamp ? Storage.TimeStamp : Storage.TimeStamp = Date.now()
+        Storage.TimeStamp = Storage.TimeStamp ? Storage.TimeStamp : Date.now()
+        return Storage.TimeStamp
     }
 
     const GetRegisteredKeyBinds = () => {
         const Storage = GetHotReloadPersistentStorage()
-        return Storage.RegisteredKeyBinds ? Storage.RegisteredKeyBinds : Storage.RegisteredKeyBinds = {}
+        Storage.RegisteredKeyBinds =  Storage.RegisteredKeyBinds ? Storage.RegisteredKeyBinds : {}
+        return Storage.RegisteredKeyBinds
     }
 
     function MulticastDelegate () {
@@ -40,12 +42,14 @@
 
     const GetCommandDelegates = () => {
         const Storage = GetHotReloadPersistentStorage()
-        return Storage.CommandDelegates ? Storage.CommandDelegates : Storage.CommandDelegates = {}
+        Storage.CommandDelegates = Storage.CommandDelegates ? Storage.CommandDelegates : {}
+        return Storage.CommandDelegates
     }
 
     const GetCommandDelegate = (CommandId) => {
         const CommandDelegates = GetCommandDelegates()
-        return CommandDelegates[CommandId] ?  CommandDelegates[CommandId] :  CommandDelegates[CommandId] = new MulticastDelegate()
+        CommandDelegates[CommandId] = CommandDelegates[CommandId] ?  CommandDelegates[CommandId] : new MulticastDelegate()
+        return CommandDelegates[CommandId]
     }
 
     const GetKeyBindForCommand = (DOTAKeybindCommand) => Game.GetKeybindForCommand(DOTAKeybindCommand).replace("ALT-", "ALT+"); // CreateCustomKeyBind will work as expected with KeyBinds that use the ALT modifier
