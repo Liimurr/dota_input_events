@@ -76,9 +76,9 @@ const IsMainLayerCommand = (CommandId) => IsValidCommand(CommandId) && !IsShopLa
 const RegisterKeybinds = () => {
     ClearAllExistingKeyBindCallbacks()
     
-    for (const Property in DOTAKeybindCommand_t)
+    for (const DOTAKeybindCommandName in DOTAKeybindCommand_t)
     {
-        const CommandId = DOTAKeybindCommand_t[Property]
+        const CommandId = DOTAKeybindCommand_t[DOTAKeybindCommandName]
         
         if (!IsMainLayerCommand(CommandId))
             continue
@@ -96,18 +96,18 @@ const RegisterKeybinds = () => {
             RegisteredKeyBinds[KeyBind] = {}
             RegisteredKeyBinds[KeyBind].Callback = () => InvokeCommand(CommandId)
 
-            const CommandName = `CommandHook_${EKeyBindLayers.MainLayer}_KeyBind_${KeyBind}_${GetTimeStamp()}`
-            Print("command name: " + CommandName)
+            const CustomCommandName = `CommandHook_${EKeyBindLayers.MainLayer}_KeyBind_${KeyBind}_${GetTimeStamp()}`
+            Print("Creating command: " + CustomCommandName)
             
-            Game.CreateCustomKeyBind(KeyBind, CommandName);
-            Game.AddCommand(CommandName, () => {
+            Game.CreateCustomKeyBind(KeyBind, CustomCommandName);
+            Game.AddCommand(CustomCommandName, () => {
                 Print(`Attempting to call command for keybind ${KeyBind}`)
                 RegisteredKeyBinds[KeyBind].Callback()
             }, "", 0);
-            Print(`Registering KeyBind ${KeyBind} to call command ${CommandId}`)
+            Print(`Registering KeyBind ${KeyBind} to call command ${DOTAKeybindCommandName}`)
         } else {
             RegisteredKeyBinds[KeyBind].Callback = () => InvokeCommand(CommandId)
-            Print(`Re-registering KeyBind ${KeyBind} to call command ${CommandId}`)
+            Print(`Re-registering KeyBind ${KeyBind} to call command ${DOTAKeybindCommandName}`)
         }
     }
 }
