@@ -1,6 +1,16 @@
 ﻿(() => {
+    const OutputDebugInfo = true
+
+    const Print = (String) => {
+        if (OutputDebugInfo)
+            $.Msg(String)
+    }
+    
     const CommandEvents = GameUI.CustomUIConfig().CommandEvents
-    if (!CommandEvents.Test1) {
+    if (!CommandEvents)
+        $.Warning("CommandEvents not initialized, make sure input_events.js is included in the xml file before input_events_test.js")
+    
+    if (CommandEvents && !CommandEvents.Test1) {
         Print("Running Input Events Test 1")
         CommandEvents.Test1 = {}
 
@@ -23,13 +33,13 @@
 
         CommandEvents.Add(QuickCastAbility2, () => {
             Print("Ability 2 Handler (D)")
-            CommandEvents.Remove(DelegateHandleB) // remove just the event callback B for quickcast ability 1
+            CommandEvents.Remove(DelegateHandleB) // remove just the event callback B for quick-cast ability 1
         })
 
         CommandEvents.Add(QuickCastAbility3, () => {
-            Print("Ability 2 Handler (E)")
-            CommandEvents.Empty(QuickCastAbility1) // remove all event callbacks for quickcast ability 1
-            CommandEvents.Empty(QuickCastAbility2) // remove all event callbacks for quickcast ability 2
+            Print("Ability 3 Handler (E)")
+            CommandEvents.Empty(QuickCastAbility1) // remove all event callbacks for quick-cast ability 1
+            CommandEvents.Empty(QuickCastAbility2) // remove all event callbacks for quick-cast ability 2
         })
     }
 })()
