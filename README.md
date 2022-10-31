@@ -1,5 +1,8 @@
 # Dota Mod Input Events
-This is meant to be a library that simplifies creating callbacks for DOTAKeybindCommands.
+
+This is for people who want to bind callbacks to DOTAKeybindCommands which update when the user changes their settings. 
+Feel free to use in your projects any way you see fit
+
 * pros
   * Is able to re-register key binds when the user changes their settings (and does so automatically)
 * cons
